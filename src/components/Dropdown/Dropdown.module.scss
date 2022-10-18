@@ -1,0 +1,49 @@
+.name {
+    display: flex;
+    background: none;
+    margin-left: 3em;
+    margin-top: 0.6em;
+    font-weight: bold;
+    &:hover {
+        cursor: pointer;
+    }
+}
+
+.menuContainer {
+    margin-left: 2.5em;
+    background: none;
+    width: 55em;
+    position: absolute;
+    .dropdownMenu {
+        background: rgb(34, 45, 51);
+        max-width: 55em;
+        //margin-top: 2.5em;
+        -webkit-box-shadow: inset 0px 11px 10px -7px rgba(0,0,0,0.2); 
+        box-shadow: inset 0px 11px 10px -7px rgba(0,0,0,0.2);
+        display: flex;
+        flex-wrap: wrap;
+        .data {
+            border-radius: 0.2em;
+            background: none;
+            padding: 0.5em 1em 0.5em 1em;
+            min-width: 8em;
+            max-width: 8em;
+            max-height: 1.1em;
+            &:hover {
+                background: rgb(80, 80, 80);
+                cursor: pointer;
+            }
+        }
+    }
+    .fackeName {
+        height: 1.9em;
+        max-width: 7em;
+        background: none;
+        margin-left: 0.5em;
+        padding-top: 0.6em;
+        font-weight: bold;
+        &:hover {
+            cursor: pointer;
+        }
+    }
+}

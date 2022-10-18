@@ -1,7 +1,66 @@
 .container {
-    max-width: 80%;
-    min-height: 600px;
-    background: rgb(34, 33, 33);
-    margin: 100px auto 100px auto;
+    width: 60em;
+    background: rgb(9, 22, 28);
+    margin: 6em auto 6em auto;
     color: white;
+    @media (max-width: 480px) {
+        font-size: 1em;
+    }
+    @media (min-width: 1680px) {
+        font-size: 1.5em;
+    }
+    .header {
+        background: none;
+    }
+    .button {
+        background: none;
+        button {
+            background: white;
+            @media (max-width: 480px) {
+                font-size: 2em;
+            }
+        }
+    }
+    .MovieCard {
+        //background: rgb(9, 22, 28);
+        background: none;
+    }
+    .pages{
+        display: flex;
+        justify-content: center;
+        background: rgb(9, 22, 28);
+        padding-bottom: 1rem;
+        .GrFormPrevious, .GrFormNext {
+            background: white;
+            border-radius: 20px;
+            height: 1.8em;
+            width: 1.8em; 
+            margin-right: 1rem;
+            margin-left: 1rem;
+            margin-top: 0.5rem;
+            cursor: pointer;
+            &:active {
+                transform: scale(0.8);
+            }           
+        }
+        .pagesContainer {
+            background: none;
+            display: flex;
+            margin-top: 0.9rem;
+            div {
+                padding: 0 0.5rem 0 0.5rem;
+                background: none;
+                &:hover {
+                    cursor: pointer;
+                    text-decoration: underline;
+                }
+                
+            }
+            .active {
+                margin-bottom: 0.5rem;
+                border-radius: 5px;
+                background: rgb(80, 80, 80); 
+            }
+        }
+    }
 }
