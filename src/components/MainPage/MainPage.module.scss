@@ -3,22 +3,42 @@
     background: rgb(9, 22, 28);
     margin: 6em auto 6em auto;
     color: white;
-    @media (max-width: 480px) {
+    /* @media (max-width: 480px) {
         font-size: 1em;
     }
     @media (min-width: 1680px) {
         font-size: 1.5em;
-    }
+    } */
     .header {
         background: none;
     }
     .button {
         background: none;
+        margin-top: 1.5em;
+        display: flex;
+        flex-direction: row-reverse;
+        margin-right: 1em;
         button {
-            background: white;
+            background: rgb(9, 22, 28);
+            border: none;
+            border-radius: 5px;
+            color: white;
+            padding: 0.5rem;
+            text-decoration: underline;
+            &:hover {
+                background: rgb(80, 80, 80);
+                text-decoration: none;
+            }
+            &:active {
+                transform: scale(0.8);
+            } 
             @media (max-width: 480px) {
                 font-size: 2em;
             }
+        }
+        .chosen {
+            background: rgb(80, 80, 80);
+            text-decoration: none; 
         }
     }
     .MovieCard {
@@ -63,4 +83,11 @@
             }
         }
     }
+}
+
+.movieDetailsData {
+    position: absolute;;
+    background: none;
+    display: flex;
+    width: 100%;  
 }

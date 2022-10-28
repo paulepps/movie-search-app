@@ -1,5 +1,5 @@
 
-//const API_KEY = '17ba521d68525d080424b09a36bd4778';
+const api_key = '17ba521d68525d080424b09a36bd4778';
 
 export async function Genres() {
     try {
@@ -13,13 +13,73 @@ export async function Genres() {
     }
 }
 
-export async function Discover(isActive) {
+export async function Movies(page, movieType) {
     try {
         const api_url = await fetch(
-        `https://api.themoviedb.org/3/discover/movie?api_key=17ba521d68525d080424b09a36bd4778&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=${isActive}&with_watch_monetization_types=flatrate`
+        `https://api.themoviedb.org/3/movie/${movieType}?api_key=${api_key}&language=en-US&page=${page}`
         );
-        const discover = await api_url.json();
-        return discover
+        const movies = await api_url.json();
+        return movies
+    } catch (error) {
+        console.log("Error:", error);
+    }
+}
+
+export async function Movie(movieId) {
+    try {
+        const api_url = await fetch(
+        `https://api.themoviedb.org/3/movie/${movieId}?api_key=${api_key}&language=en-US`
+        );
+        const movie = await api_url.json();
+        return movie
+    } catch (error) {
+        console.log("Error:", error);
+    }
+}
+
+export async function Video(movieId) {
+    try {
+        const api_url = await fetch(
+        `https://api.themoviedb.org/3/movie/${movieId}/videos?api_key=${api_key}&language=en-US`
+        );
+        const video = await api_url.json();
+        return video
+    } catch (error) {
+        console.log("Error:", error);
+    }
+}
+
+export async function SimilarMovies(movieId, page) {
+    try {
+        const api_url = await fetch(
+        `https://api.themoviedb.org/3/movie/${movieId}/similar?api_key=${api_key}&language=en-US&page=${page}`
+        );
+        const similarMovies = await api_url.json();
+        return similarMovies
+    } catch (error) {
+        console.log("Error:", error);
+    }
+}
+
+export async function Reviews(movieId, page) {
+    try {
+        const api_url = await fetch(
+        `https://api.themoviedb.org/3/movie/${movieId}/reviews?api_key=${api_key}&language=en-US&${page}`
+        );
+        const reviews = await api_url.json();
+        return reviews
+    } catch (error) {
+        console.log("Error:", error);
+    }
+}
+
+export async function Cast (movieId) {
+    try {
+        const api_url = await fetch(
+        `https://api.themoviedb.org/3/movie/${movieId}/credits?api_key=${api_key}&language=en-US`
+        );
+        const cast  = await api_url.json();
+        return cast 
     } catch (error) {
         console.log("Error:", error);
     }

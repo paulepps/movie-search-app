@@ -14,7 +14,7 @@ export function Dropdown({name, data}) {
             </div>  
         <div className={styles.dropdownMenu} > 
             {data.map((data) => (
-                <div className={styles.data} key={data.id}> {data.name} </div>
+                <div className={styles.data} key={data.id} > {data.name} </div>
             ))}
         </div>
     </div>;

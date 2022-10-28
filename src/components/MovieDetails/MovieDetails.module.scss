@@ -1,0 +1,187 @@
+
+.detailsContainer {
+    background: rgb(9, 22, 28);
+    width: 60em;
+    color: white;
+    margin: 2.5em auto 0 auto ;
+    min-height: 100em;
+    div, span {
+        background: none;
+    }
+    iframe {
+        margin: 1em auto 1em auto;
+        display: flex;
+        width: 50em;
+        height: 30em;
+    }  
+    button {
+        background: none;
+        border: none;
+        color: rgb(46, 133, 158);
+        font-weight: bold;
+        font-size: 1rem;
+        margin-right: 2em;
+        margin-top: 1em;
+        text-decoration: underline;
+    }     
+    .title {
+        font-weight: bold;
+        padding-left: 1rem;
+        font-size: 30px;
+        display: flex;
+        justify-content: space-between;    
+    }
+    .originalTitle {
+        margin-left: 1rem;
+        opacity: 0.6;    
+    }
+    .containerTop {
+        display: flex;
+        .actorInfo {
+            position: absolute;
+            background: rgb(9, 22, 28);
+            padding: 1rem;
+            border: 1px solid black;
+            margin-left: 33em;
+            z-index: 1000;
+            .actorPhoto {
+                max-width: 10em;
+                max-height: 15em;
+            }
+            .actorName {
+                font-weight: bold;
+            }
+        }
+        .poster {
+            max-width: 20em;
+            max-height: 30em;
+            margin: 0.5em 1em 1em 1em;            
+        }
+        .containerRight {
+            background: none;
+            margin-top: 0.5em;
+            //display: flex;
+            div {            
+                padding-bottom: 1em;
+                display: flex;
+            }
+            span {
+                opacity: 0.6;
+                //display: flex;
+                //justify-content: flex-end;
+                //text-align: justify;
+            }
+            p {
+                background: none;
+                min-width: 11em;
+            }
+            .genresContainer {
+                display: flex;
+                flex-direction: column;
+                .genres {           
+                    background: none;
+                    margin-bottom: 0.5em;
+                }
+            }
+            .cast {
+                display: flex;
+                flex-wrap: wrap;
+                .actors {
+                    margin-right: 0.5em;
+                    color: rgb(46, 133, 158);
+                    &:hover {
+                        cursor: default;
+                        text-decoration: underline;
+                    }
+                }
+            }
+        }
+    }
+    .overview {
+        background: none;
+        margin-left: 1em;
+        margin-right: 1em;
+        display: flex;
+        flex-direction: column;   
+        span {
+            background: none;
+            font-size: 22px;
+            margin-bottom: 0.5em;
+        }
+        div {     
+            opacity: 0.6;
+        }
+    }
+    .vote {
+        flex-wrap: wrap;
+    }
+    .movieCardContainer {
+        //max-height: 21em;
+        //overflow: hidden;
+        display: flex;
+        justify-content: space-around;
+        font-size: 14px;
+        .gr {
+            margin-top: 3.4em;
+            background: none;
+            font-size: 2rem;
+        }
+        .emptyGr {
+            min-width: 2em;
+        }
+    }
+    .head {
+        font-weight: bold;
+        font-size: 22px;        
+        margin-left: 1rem;
+        margin-bottom: 1rem;
+    }
+    .noResults {
+        margin-bottom: 2rem;
+        opacity: 0.6;
+        margin-left: 1rem;
+    }
+    .reviewContainer {
+        margin-bottom: 1em;
+        .author {
+            padding-left: 1em;
+            display: flex;
+            background: rgb(34, 45, 51);
+            img {
+                height: 3em;
+                width: 3em;
+                background: none;
+            }
+            div {
+                margin-left: 1em;
+                display: flex;
+                align-items: flex-end;
+                font-weight: bold;
+                span {
+                    color: rgb(46, 133, 158);
+                    margin-left: 0.4em;
+                    margin-right: 0.4em;
+                }
+            }
+        }
+        .content {
+            margin-top: 1em;
+            margin-left: 5em;
+            margin-right: 1em;
+            text-align: justify;
+            opacity: 0.8;
+        }
+        .updated {
+            display: flex;
+            justify-content: flex-end;
+            margin-right: 1em;
+            margin-top: 0.5em;
+            font-weight: bold;
+        }
+    }
+    .botButton {
+        display: flex;
+        justify-content: flex-end;
+        margin-bottom: 2em;
+    }
+}
