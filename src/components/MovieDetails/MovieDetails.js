@@ -6,12 +6,15 @@ import { Video } from '../../api';
 import { SimilarMovies } from '../../api';
 import { Reviews } from '../../api';
 import { Cast } from '../../api';
+import { PostRating } from '../../api';
 import { MovieCard } from '../../components/MovieCard';
 import { FcNext } from 'react-icons/fc';
 import { FcPrevious } from 'react-icons/fc';
 import NoContent from '../../img/NoContent.png';
+import {ReactComponent as Star } from '../../img/Star.svg';
+import { useParams } from 'react-router-dom';
 
-export function MovieDetails({movieId, moviesData, dataId}) {
+export function MovieDetails({guestId}) {
     const [movieData, setMovieData] = useState();
     const [video, setVideo] = useState();
     const [similar, setSimilar] = useState();
@@ -20,8 +23,23 @@ export function MovieDetails({movieId, moviesData, dataId}) {
     const [similarArr, setSimilarArr] = useState(0);
     const [actorPhoto, setActorPhoto] = useState(false);
     const [actorName, setActorName] = useState();
+    const [rating, setRating] = useState();
+    const [ratingChange, setRatingChange] = useState();
+    //const [postRating, setPostRating] = useState();
+    //const [ratingData, setRatingData] = useState();
+    
+    const {id} = useParams();
+    //const [movieId, setMovieId] = useState(id);
+
+     async function fetchRating() {
+         const movieId = id;
+         return (
+             await PostRating(movieId, ratingChange, guestId)
+        )
+    }
         
     async function fetchMovie() {
+        const movieId = id;
         const page = 1;
         return (
             setMovieData(await Movie(movieId)),
@@ -34,14 +52,17 @@ export function MovieDetails({movieId, moviesData, dataId}) {
 
     useEffect(() => {
         fetchMovie();
-        window.scrollTo(0, 0);
+        console.log(guestId);
+        //window.scrollTo(0, 0); ------------------------------------------------------------------------------
     // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
+
+
 
     return (
         movieData !== undefined &&
         <div className={styles.detailsContainer}>
-            <div className={styles.title}> {movieData.title} <button onClick={() => {dataId(undefined)} } > Back &gt; </button> </div>
+            <div className={styles.title}> {movieData.title} <button onClick={() => window.history.go(-1)} > Back &gt; </button> </div>
             <div className={styles.originalTitle}> {movieData.original_title} </div>
             <div className={styles.containerTop}>
                 {actorPhoto !== false && 
@@ -49,10 +70,8 @@ export function MovieDetails({movieId, moviesData, dataId}) {
                         <img className={styles.actorPhoto} src={actorPhoto !== null ? `https://image.tmdb.org/t/p/w500${actorPhoto}` : NoContent} alt=""/>
                         <div className={styles.actorName}>  {actorName} </div>
                     </div>
-                }
-                
-
-
+                }                
+                <img className={styles.poster} src={`https://image.tmdb.org/t/p/w500${movieData.backdrop_path}`} alt=""/> 
                 <div className={styles.containerRight} >
                     <div> <p> Tagline: </p> <span> {movieData.tagline === '' ? '-' : movieData.tagline} </span> </div>
                     <div> <p> Status: </p> <span> {movieData.status} </span> </div>
@@ -80,7 +99,7 @@ export function MovieDetails({movieId, moviesData, dataId}) {
                 </div>
             </div>
             <div className={styles.overview}>                 
-                <span> What is the «{movieData.title}» movie about: </span>
+                <span > What is the «{movieData.title}» movie about: </span>
                 <div> {movieData.overview} </div>
             </div>            
             <iframe  
@@ -91,8 +110,19 @@ export function MovieDetails({movieId, moviesData, dataId}) {
                 allowFullScreen>    
             </iframe>
             <div className={styles.vote}>
-                <div> {movieData.vote_average} </div>
-                <div> {movieData.vote_count} </div>
+                <div className={styles.rateTitle}> Rate the movie: </div>
+                <Star className={`${ratingChange >= 1 ? styles.star2 : styles.star1}`} onMouseLeave={() => setRatingChange(rating)} onMouseEnter={() => setRatingChange(1)} onClick={() => {rating !== 1 ? setRating(ratingChange) : setRating(); fetchMovie()}} />
+                <Star className={`${ratingChange >= 2 ? styles.star2 : styles.star1}`} onMouseLeave={() => setRatingChange(rating)} onMouseEnter={() => setRatingChange(2)} onClick={() => {rating !== 2 ? setRating(ratingChange) : setRating(); fetchRating()}} />
+                <Star className={`${ratingChange >= 3 ? styles.star2 : styles.star1}`} onMouseLeave={() => setRatingChange(rating)} onMouseEnter={() => setRatingChange(3)} onClick={() => {rating !== 3 ? setRating(ratingChange) : setRating(); fetchRating()}} />
+                <Star className={`${ratingChange >= 4 ? styles.star2 : styles.star1}`} onMouseLeave={() => setRatingChange(rating)} onMouseEnter={() => setRatingChange(4)} onClick={() => {rating !== 4 ? setRating(ratingChange) : setRating(); fetchRating()}} />
+                <Star className={`${ratingChange >= 5 ? styles.star2 : styles.star1}`} onMouseLeave={() => setRatingChange(rating)} onMouseEnter={() => setRatingChange(5)} onClick={() => {rating !== 5 ? setRating(ratingChange) : setRating(); fetchRating()}} />
+                <Star className={`${ratingChange >= 6 ? styles.star2 : styles.star1}`} onMouseLeave={() => setRatingChange(rating)} onMouseEnter={() => setRatingChange(6)} onClick={() => {rating !== 6 ? setRating(ratingChange) : setRating(); fetchRating()}} />
+                <Star className={`${ratingChange >= 7 ? styles.star2 : styles.star1}`} onMouseLeave={() => setRatingChange(rating)} onMouseEnter={() => setRatingChange(7)} onClick={() => {rating !== 7 ? setRating(ratingChange) : setRating(); fetchRating()}} />
+                <Star className={`${ratingChange >= 8 ? styles.star2 : styles.star1}`} onMouseLeave={() => setRatingChange(rating)} onMouseEnter={() => setRatingChange(8)} onClick={() => {rating !== 8 ? setRating(ratingChange) : setRating(); fetchRating()}} />
+                <Star className={`${ratingChange >= 9 ? styles.star2 : styles.star1}`} onMouseLeave={() => setRatingChange(rating)} onMouseEnter={() => setRatingChange(9)} onClick={() => {rating !== 9 ? setRating(ratingChange) : setRating(); fetchRating()}} />
+                <Star className={`${ratingChange === 10 ? styles.star2 : styles.star1}`} onMouseLeave={() => setRatingChange(rating)} onMouseEnter={() => setRatingChange(10)} onClick={() => {rating !== 10 ? setRating(ratingChange) : setRating(); fetchRating()}} />
+                <div className={styles.average}> {movieData.vote_average} </div>
+                <div className={styles.count} >  ({movieData.vote_count}) </div>
             </div>
             <div className={styles.head} >
                 The similar movies:
@@ -102,7 +132,7 @@ export function MovieDetails({movieId, moviesData, dataId}) {
                 <FcPrevious className={styles.gr} onClick={() => setSimilarArr(similarArr-5)}/> 
                 : <div className={styles.emptyGr}>  </div>}
                 {similar !== undefined && 
-                <MovieCard className={styles.movieCard} moviesData={similar.results.slice(similarArr, similarArr+5)} movieId={dataId} /> }
+                <MovieCard className={styles.movieCard} moviesData={similar.results.slice(similarArr, similarArr+5)}/> }
                 {similarArr !== 15 ?
                 <FcNext className={styles.gr} onClick={() => setSimilarArr(similarArr+5)}/>
                 : <div className={styles.emptyGr}>  </div>}
@@ -114,13 +144,13 @@ export function MovieDetails({movieId, moviesData, dataId}) {
             <div> 
                 {reviews.results.length === 0 ? <div className={styles.noResults}> No results. </div> :
                 reviews.results.map((review) => (                 
-                    <div className={styles.reviewContainer}>
+                    <div className={styles.reviewContainer} key={review.id}>
                         <div className={styles.author}>
                             {review.author_details.avatar_path !== null ? 
                             <img src={review.author_details.avatar_path.slice(9, 25) === 'www.gravatar.com' ? review.author_details.avatar_path.slice(1, review.author_details.avatar_path.length) : `https://image.tmdb.org/t/p/w500${review.author_details.avatar_path}`} alt="" />
                             : <img src={NoContent} alt="" />
                             }
-                            <div key={review.id}> Written <span> {review.author} </span> in {review.created_at.slice(0, 10)} </div>
+                            <div > Written <span> {review.author} </span> in {review.created_at.slice(0, 10)} </div>
                         </div>
                         <div className={styles.content}> 
                             {review.content}   
@@ -131,7 +161,7 @@ export function MovieDetails({movieId, moviesData, dataId}) {
                     </div>))}
             </div>}
             <div className={styles.botButton}>
-                <button onClick={() => {dataId(undefined)} } > Back &gt; </button>
+                <button onClick={() => window.history.go(-1)}> Back &gt; </button>
             </div>
         </div>
     );

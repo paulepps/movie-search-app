@@ -84,3 +84,30 @@ export async function Cast (movieId) {
         console.log("Error:", error);
     }
 }
+
+export async function PostRating (movieId, ratingChange) {
+    try {
+        const api_url = await fetch(
+            `https://api.themoviedb.org/3/movie/${movieId}/rating?api_key=${api_key}`, {
+                method: 'POST',
+                body: {"value": ratingChange}
+            }
+        );
+        const postRating  = await api_url();
+        return postRating;
+    } catch (error) {
+        console.log("Error:", error);
+    }
+}
+
+export async function Authentication () {
+    try {
+        const api_url = await fetch(
+        `https://api.themoviedb.org/3/authentication/guest_session/new?api_key=${api_key}`
+        );
+        const cast  = await api_url.json();
+        return cast 
+    } catch (error) {
+        console.log("Error:", error);
+    }
+}

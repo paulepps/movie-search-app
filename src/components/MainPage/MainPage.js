@@ -6,8 +6,8 @@ import React from 'react';
 import { GrFormPrevious } from 'react-icons/gr';
 import { GrFormNext } from 'react-icons/gr';
 import { useEffect, useState } from 'react';
-import { MovieDetails } from '../../components/MovieDetails';
 import { Movies } from '../../api';
+//import { Link } from 'react-router-dom';
 
 
 export function MainPage() {
@@ -15,10 +15,8 @@ export function MainPage() {
     const [movieType, setMovieType] = useState('popular');
     const [movieTypeButton, setMovieTypeButton] = useState('popular');
     const [page, setPage] = useState(1);
-    const [movieId, setMovieId] = useState();
-
     const moviesData = movies.results;
-
+  
     const pages = [
         {page: movies.page <= 5 ? 1 : movies.page >= 496 ? 492 : movies.page - 4},
         {page: movies.page <= 5 ? 2 : movies.page >= 496 ? 493 : movies.page - 3},
@@ -39,15 +37,12 @@ export function MainPage() {
     }
 
     useEffect(() => {
-        fetchMovies()
+        fetchMovies()   
     // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
     return (           
         <>
-            <div className={styles.movieDetailsData} >
-                {movieId !== undefined && <MovieDetails moviesData={moviesData} movieId={movieId} dataId={setMovieId} />}
-            </div>
             {moviesData !== undefined &&
             <div className={styles.container}>
                 <div className={styles.header}>
@@ -58,7 +53,7 @@ export function MainPage() {
                     <button className={`${movieTypeButton === 'popular' && styles.chosen}`} onMouseLeave={() => movieTypeButton !== 'popular' && setMovieType(movieTypeButton) } onMouseEnter={() => {setMovieType('popular'); setPage(1)}} onClick={() => {fetchMovies(); setMovieTypeButton('popular')}} > Popular </button>
                 </div>
                 <div className={styles.MovieCard} >                
-                    <MovieCard moviesData={moviesData} movieId={setMovieId} />
+                    <MovieCard moviesData={moviesData} />
                 </div>
                 <div className={styles.pages}>
                     {movies.page > 1 && <GrFormPrevious className={styles.GrFormPrevious} onClick={() =>  {fetchMovies(); window.scrollTo(0, 0)}} onMouseEnter={() => setPage(movies.page - 1)} />}
@@ -87,5 +82,3 @@ export function MainPage() {
         </>
     )
 }
-
-//(e) => this.setState({ сompanyName: e.target.value })
