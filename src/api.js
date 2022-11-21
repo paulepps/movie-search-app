@@ -85,16 +85,37 @@ export async function Cast (movieId) {
     }
 }
 
-export async function PostRating (movieId, ratingChange) {
+export async function PostRating (movieId, ratingChange, guestId) {
+    const value = {"value": ratingChange};
     try {
-        const api_url = await fetch(
-            `https://api.themoviedb.org/3/movie/${movieId}/rating?api_key=${api_key}`, {
-                method: 'POST',
-                body: {"value": ratingChange}
+        await fetch(
+            `https://api.themoviedb.org/3/movie/${movieId}/rating?api_key=${api_key}&guest_session_id=${guestId}`, 
+            {
+                method: "POST",
+                headers: 
+                { 
+                    "Content-Type": "application/json;charset=utf-8" 
+                },
+                body: JSON.stringify(value),
             }
-        );
-        const postRating  = await api_url();
-        return postRating;
+        )
+    } catch (error) {
+        console.log("Error:", error);
+    }
+}
+
+export async function DeleteRating (movieId, guestId) {
+    try {
+        await fetch(           
+            `https://api.themoviedb.org/3/movie/${movieId}/rating?api_key=${api_key}&guest_session_id=${guestId}`, 
+            {
+                method: "DELETE",
+                headers: 
+                { 
+                    "Content-Type": "application/json;charset=utf-8" 
+                }
+            }
+        )
     } catch (error) {
         console.log("Error:", error);
     }
@@ -105,9 +126,34 @@ export async function Authentication () {
         const api_url = await fetch(
         `https://api.themoviedb.org/3/authentication/guest_session/new?api_key=${api_key}`
         );
-        const cast  = await api_url.json();
-        return cast 
+        const authentication  = await api_url.json();
+        return authentication 
     } catch (error) {
         console.log("Error:", error);
     }
 }
+
+export async function GetGuestInfo (guestSessionId) {
+    try {
+        const api_url = await fetch(
+        `https://api.themoviedb.org/3/guest_session/${guestSessionId}/rated/movies?api_key=${api_key}&language=en-US&sort_by=created_at.asc`
+        );
+        const guestInfo  = await api_url.json();
+        return guestInfo 
+    } catch (error) {
+        console.log("Error:", error);
+    }
+}
+
+export async function MoviesByGenre (page, genreId) {
+    try {
+        const api_url = await fetch(
+        `https://api.themoviedb.org/3/discover/movie?api_key=${api_key}&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=${page}&with_genres=${genreId}&with_watch_monetization_types=flatrate`
+        );
+        const movie  = await api_url.json();
+        return movie 
+    } catch (error) {
+        console.log("Error:", error);
+    }
+}
+

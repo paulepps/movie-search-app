@@ -4,6 +4,7 @@
     justify-content: center;  
     .headerLogo {
         height: 2.5em;
+        cursor: pointer;
         @media (max-width: 480px) {
             height: 3.5em;
         }
@@ -17,4 +18,13 @@
     @media (max-width: 480px) {
         font-size: 1.5em;
     }
+    button {
+        background: none;
+        border: none;
+        color: rgb(46, 133, 158);
+        font-weight: bold;
+        font-size: 1rem;
+        margin-left: 55rem;
+        text-decoration: underline;
+    } 
 }

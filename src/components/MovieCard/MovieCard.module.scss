@@ -48,7 +48,7 @@
             background: rgb(9, 22, 28);
             color: rgb(46, 133, 158);
             font-weight: bold;
-            margin-top: 1em;
+            margin-top: 0.7em;
             margin-bottom: 0.1em;
         }
         .date {
@@ -56,6 +56,12 @@
             font-size: 0.8em;
             color: rgb(173, 172, 172);
             font-weight: bold;
+        }
+        .link {
+            width: 10em;
+            background: none;
+            text-decoration: none;
+            color: white;  
         }
     }
 }

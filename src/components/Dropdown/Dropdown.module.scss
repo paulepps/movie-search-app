@@ -4,6 +4,7 @@
     margin-left: 3em;
     margin-top: 0.6em;
     font-weight: bold;
+    color: white;
     &:hover {
         cursor: pointer;
     }
@@ -29,6 +30,7 @@
             min-width: 8em;
             max-width: 8em;
             max-height: 1.1em;
+            color: white;
             &:hover {
                 background: rgb(80, 80, 80);
                 cursor: pointer;
@@ -42,6 +44,7 @@
         margin-left: 0.5em;
         padding-top: 0.6em;
         font-weight: bold;
+        color: white;
         &:hover {
             cursor: pointer;
         }

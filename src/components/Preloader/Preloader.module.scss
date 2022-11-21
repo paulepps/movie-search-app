@@ -1,0 +1,13 @@
+.preloader {
+    background: none;
+    width: 60em;
+    margin: auto;
+    margin-top: 5rem;
+    display: flex;
+    justify-content: center;
+    .spinner {
+        height: 10rem;
+        width: 10rem;
+        margin-top: 10rem;
+    }
+}

@@ -1,29 +1,24 @@
-
+.header {
+    margin: 2.5em auto 0 auto ;
+    background: none;
+    width: 60em;
+}
 .detailsContainer {
     background: rgb(9, 22, 28);
     width: 60em;
     color: white;
-    margin: 2.5em auto 0 auto ;
+    margin: auto;
     min-height: 100em;
     div, span {
         background: none;
     }
     iframe {
+        background: none;
         margin: 1em auto 1em auto;
         display: flex;
         width: 50em;
         height: 30em;
-    }  
-    button {
-        background: none;
-        border: none;
-        color: rgb(46, 133, 158);
-        font-weight: bold;
-        font-size: 1rem;
-        margin-right: 2em;
-        margin-top: 1em;
-        text-decoration: underline;
-    }     
+    }      
     .title {
         font-weight: bold;
         padding-left: 1rem;
@@ -54,10 +49,9 @@
             }
         }
         .poster {
-            width: 40em;
-            height: 25em;
-            margin: 0.5em 1em 1em 1em; 
-            overflow: hidden;         
+            background: none;
+            max-width: 17em;
+            margin: 0.5em 1em 1em 1em;       
         }
         img {
             width: 100%;
@@ -222,9 +216,9 @@
             font-weight: bold;
         }
     }
-    .botButton {
-        display: flex;
-        justify-content: flex-end;
-        margin-bottom: 2em;
-    }
+}
+.preloader {
+    background: rgb(9, 22, 28);
+    height: 100%;
+    width: 100%;
 }
