@@ -18,6 +18,7 @@ import { Preloader } from '../../components/Preloader';
 import { GetGuestInfo } from '../../api';
 import { DeleteRating } from '../../api';
 import SmalSpinner from '../../img/SmalSpinner.gif';
+import { useNavigate } from "react-router-dom";
 
 export function MovieDetails() {
     const [movieData, setMovieData] = useState();
@@ -34,6 +35,7 @@ export function MovieDetails() {
     const [isLoading, setIsLoading] = useState(true);
     const {movieId} = useParams();
 
+    const navigate = useNavigate();
     const guestId = localStorage.getItem('guestId');    
     
     async function GuestRating(guestInfo, movieId) {
@@ -76,13 +78,19 @@ export function MovieDetails() {
         
     async function FetchMovie() {
         const page = 1;
-        setMovieData(await Movie(movieId));
-        setVideo(await Video(movieId));
-        setSimilar(await SimilarMovies(movieId, page));
-        setReviews(await Reviews(movieId, page));
-        setCast(await Cast(movieId));
-        return (
-            setIsLoading(false)
+        let movie = await Movie(movieId);
+        let video = await Video(movieId);
+        let similar = await SimilarMovies(movieId, page);
+        let reviews = await Reviews(movieId, page);
+        let cast = await Cast(movieId);
+        return (           
+            setMovieData(movie),
+            setVideo(video),
+            setSimilar(similar),
+            setReviews(reviews),
+            setCast(cast),
+            setIsLoading(false),
+            !movie.id && navigate('/*')
         )
     }
 
@@ -93,7 +101,7 @@ export function MovieDetails() {
         window.scrollTo(0, 0);
     // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [movieId])
-                       
+                                        
     return (
         isLoading ? 
         <Preloader />
