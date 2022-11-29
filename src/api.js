@@ -13,17 +13,17 @@ export async function Genres() {
     }
 }
 
-export async function Movies(page, movieType) {
-    try {
-        const api_url = await fetch(
-        `https://api.themoviedb.org/3/movie/${movieType}?api_key=${api_key}&language=en-US&page=${page}`
-        );
-        const movies = await api_url.json();
-        return movies
-    } catch (error) {
-        console.log("Error:", error);
-    }
-}
+// export async function Movies(page, movieType) {
+//     try {
+//         const api_url = await fetch(
+//         `https://api.themoviedb.org/3/movie/${movieType}?api_key=${api_key}&language=en-US&page=${page}`
+//         );
+//         const movies = await api_url.json();
+//         return movies
+//     } catch (error) {
+//         console.log("Error:", error);
+//     }
+// }
 
 export async function Movie(movieId) {
     try {
@@ -145,10 +145,10 @@ export async function GetGuestInfo (guestSessionId) {
     }
 }
 
-export async function MoviesByGenre (page, genreId) {
+export async function Movies (page, genreId, sortBy) {
     try {
         const api_url = await fetch(
-        `https://api.themoviedb.org/3/discover/movie?api_key=${api_key}&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=${page}&with_genres=${genreId}&with_watch_monetization_types=flatrate`
+        `https://api.themoviedb.org/3/discover/movie?api_key=${api_key}&language=en-US&sort_by=${sortBy}.desc&include_adult=false&include_video=false&page=${page}&with_genres=${genreId}&with_watch_monetization_types=flatrate`
         );
         const movie  = await api_url.json();
         return movie 
@@ -157,3 +157,14 @@ export async function MoviesByGenre (page, genreId) {
     }
 }
 
+export async function Search (page, searchValue) {
+    try {
+        const api_url = await fetch(
+        `https://api.themoviedb.org/3/search/movie?api_key=${api_key}&language=en-US&query=${searchValue}&page=${page}&include_adult=false`
+        );
+        const search  = await api_url.json();
+        return search 
+    } catch (error) {
+        console.log("Error:", error);
+    }
+}

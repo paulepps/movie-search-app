@@ -1,0 +1,26 @@
+.title {
+    color: white;
+    background: none;
+    font-size: 4rem;
+    font-weight: bold;
+    text-align: center;
+    margin-top: 10rem;
+    margin-bottom: 5rem;
+}
+.container {
+    display: flex;
+    justify-content: center;
+    .gohome {
+        text-decoration: none;
+        color: white;
+        background: none;
+        font-size: 4rem;
+        padding: 0.5rem;
+        border: 1px solid;
+        border-radius: 1rem;
+        background: url(../../img/Home.jpg);
+        &:active {
+            scale: 0.9;
+        }
+    }
+}

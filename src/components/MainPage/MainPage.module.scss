@@ -12,12 +12,22 @@
     .header {
         background: none;
     }
+    .searchResults {
+        background: none;
+        font-size: 32px;
+        text-align: center;
+        margin-top: 0.5rem;
+    }
     .button {
         background: none;
         margin-top: 1.5em;
         display: flex;
         flex-direction: row-reverse;
         margin-right: 1em;
+        @media (max-width: 480px) {
+            padding-right: 2em;
+            justify-content: center;
+        }
         button {
             background: rgb(9, 22, 28);
             border: none;
@@ -44,6 +54,13 @@
     .MovieCard {
         //background: rgb(9, 22, 28);
         background: none;
+    }
+    .NoResults {
+        background: none;
+        font-size: 4rem;
+        text-align: center;
+        margin-top: 10rem;
+        margin-bottom: 10rem;
     }
     .pages{
         display: flex;

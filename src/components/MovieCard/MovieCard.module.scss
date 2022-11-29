@@ -8,7 +8,7 @@
         flex-direction: column;
         width: 10em;
         margin: 1em;
-        background: none;        
+        background: rgb(9, 22, 28);       
         text-decoration: none;
         color: white;
         cursor: pointer;
@@ -35,11 +35,10 @@
                 margin-left: 2.5em;
             }
         }
-        @media (max-width: 480px) {
-            min-width: 15rem;
-        }
         img {
-            height: 15em;
+            background: rgb(9, 22, 28);
+            height: 15rem;
+            width: 10rem;
         }
         .hover {
             display: none;

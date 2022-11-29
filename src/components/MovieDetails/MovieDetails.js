@@ -17,6 +17,7 @@ import { Header } from '../../components/Header';
 import { Preloader } from '../../components/Preloader';
 import { GetGuestInfo } from '../../api';
 import { DeleteRating } from '../../api';
+import SmalSpinner from '../../img/SmalSpinner.gif';
 
 export function MovieDetails() {
     const [movieData, setMovieData] = useState();
@@ -28,35 +29,38 @@ export function MovieDetails() {
     const [actorPhoto, setActorPhoto] = useState();
     const [actorName, setActorName] = useState(false);
     const [rating, setRating] = useState();
+    const [ratingPreLoad, setRatingPreLoad] = useState(true);
     const [ratingChange, setRatingChange] = useState();
     const [isLoading, setIsLoading] = useState(true);
-    const {id} = useParams();
-    
-    const movieId = id;
+    const {movieId} = useParams();
+
+
     const guestId = localStorage.getItem('guestId');    
     
     async function GuestRating(guestInfo, movieId) {
-        for (let i = 0; i < guestInfo.length; i++) {
+            for (let i = 0; i < guestInfo.length; i++) {
             if (`${guestInfo[i].id}` === movieId) {
                 return (
                     setRating(guestInfo[i].rating),
-                    setRatingChange(guestInfo[i].rating)
+                    setRatingChange(guestInfo[i].rating),
+                    setRatingPreLoad(false)
                 )
             }
         }
         return (
             setRating(),
-            setRatingChange()
+            setRatingChange(),
+            setRatingPreLoad(false)
         )
     }
-
+    //console.log('render')
     async function FetchDeleteRating() {
         return (
             await DeleteRating(movieId, guestId)
         )
     }
 
-    async function FetchRating() {
+    async function FetchRating(ratingChange) {
         return (
             await PostRating(movieId, ratingChange, guestId)
         )
@@ -67,7 +71,7 @@ export function MovieDetails() {
         const info = await GetGuestInfo(guestSessionId);
         const guestInfo = await info.results;
         return (            
-            GuestRating(guestInfo, id)
+            GuestRating(guestInfo, movieId)
         )
     }
         
@@ -86,11 +90,11 @@ export function MovieDetails() {
     useEffect(() => {
         setIsLoading(true);
         FetchMovie();
-        FetchGuestInfo()        
-        //console.log(rating)
+        FetchGuestInfo()    
+        //console.log('render')
         //window.scrollTo(0, 0); ------------------------------------------------------------------------------
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [])
+    }, [movieId])
                                     
     //setIsLoading(true)
     return (
@@ -117,12 +121,12 @@ export function MovieDetails() {
                     <img className={styles.poster} src={`https://image.tmdb.org/t/p/w500${movieData.poster_path}`} alt=""/> 
                     <div className={styles.containerRight} >
                         <div> <p> Tagline: </p> <span> {movieData.tagline === '' ? '-' : movieData.tagline} </span> </div>
-                        <div> <p> Status: </p> <span> {movieData.status} </span> </div>
-                        <div> <p> Release date: </p> <span> {movieData.release_date} </span> </div>
-                        <div> <p> Production countries: </p> <span> {movieData.production_countries[0].name} </span> </div>
-                        <div> <p> Original language: </p> <span> {movieData.original_language} </span> </div>
-                        <div> <p> Spoken languages: </p> <span> {movieData.spoken_languages[0].name} </span> </div>
-                        <div> <p> Runtime: </p> <span> {movieData.runtime} min </span> </div>
+                        <div> <p> Status: </p> <span> {!!movieData.status ? movieData.status : '-' } </span> </div>
+                        <div> <p> Release date: </p> <span> {!!movieData.release_date ? movieData.release_date : '-' } </span> </div>
+                        <div> <p> Production countries: </p> <span> {!!movieData.production_countries[0] ? movieData.production_countries[0].name : '-'} </span> </div>
+                        <div> <p> Original language: </p> <span> {!!movieData.original_language ? movieData.original_language : '-' } </span> </div>
+                        <div> <p> Spoken languages: </p> <span> {!!movieData.spoken_languages[0] ? movieData.spoken_languages[0].name : '-' } </span> </div>
+                        <div> <p> Runtime: </p> <span> {!!movieData.runtime ? movieData.runtime : '-' } min </span> </div>
                         <div> 
                             <p> Genres: </p> 
                             <div className={styles.genresContainer}> 
@@ -145,7 +149,7 @@ export function MovieDetails() {
                     <span > What is the «{movieData.title}» movie about: </span>
                     <div> {movieData.overview} </div>
                 </div>
-                {!!video &&
+                {!!video.results[video.results.length-1] &&
                 <iframe  
                     src={`https://www.youtube.com/embed/${video.results[video.results.length-1].key}`} 
                     title="YouTube video player" 
@@ -155,19 +159,20 @@ export function MovieDetails() {
                 </iframe>}
                 <div className={styles.vote}>
                     <div className={styles.rateTitle}> Rate the movie: </div>
-                    <Star className={`${ratingChange >= 1 ? styles.star2 : styles.star1}`} onMouseLeave={() => setRatingChange(rating)} onMouseEnter={() => setRatingChange(1)} onClick={() => {if (rating !== 1) { setRating(ratingChange); FetchRating() } else { setRating(); FetchDeleteRating()}}} />
-                    <Star className={`${ratingChange >= 2 ? styles.star2 : styles.star1}`} onMouseLeave={() => setRatingChange(rating)} onMouseEnter={() => setRatingChange(2)} onClick={() => {if (rating !== 2) { setRating(ratingChange); FetchRating() } else { setRating(); FetchDeleteRating()}}} />
-                    <Star className={`${ratingChange >= 3 ? styles.star2 : styles.star1}`} onMouseLeave={() => setRatingChange(rating)} onMouseEnter={() => setRatingChange(3)} onClick={() => {if (rating !== 3) { setRating(ratingChange); FetchRating() } else { setRating(); FetchDeleteRating()}}} />
-                    <Star className={`${ratingChange >= 4 ? styles.star2 : styles.star1}`} onMouseLeave={() => setRatingChange(rating)} onMouseEnter={() => setRatingChange(4)} onClick={() => {if (rating !== 4) { setRating(ratingChange); FetchRating() } else { setRating(); FetchDeleteRating()}}} />
-                    <Star className={`${ratingChange >= 5 ? styles.star2 : styles.star1}`} onMouseLeave={() => setRatingChange(rating)} onMouseEnter={() => setRatingChange(5)} onClick={() => {if (rating !== 5) { setRating(ratingChange); FetchRating() } else { setRating(); FetchDeleteRating()}}} />
-                    <Star className={`${ratingChange >= 6 ? styles.star2 : styles.star1}`} onMouseLeave={() => setRatingChange(rating)} onMouseEnter={() => setRatingChange(6)} onClick={() => {if (rating !== 6) { setRating(ratingChange); FetchRating() } else { setRating(); FetchDeleteRating()}}} />
-                    <Star className={`${ratingChange >= 7 ? styles.star2 : styles.star1}`} onMouseLeave={() => setRatingChange(rating)} onMouseEnter={() => setRatingChange(7)} onClick={() => {if (rating !== 7) { setRating(ratingChange); FetchRating() } else { setRating(); FetchDeleteRating()}}} />
-                    <Star className={`${ratingChange >= 8 ? styles.star2 : styles.star1}`} onMouseLeave={() => setRatingChange(rating)} onMouseEnter={() => setRatingChange(8)} onClick={() => {if (rating !== 8) { setRating(ratingChange); FetchRating() } else { setRating(); FetchDeleteRating()}}} />
-                    <Star className={`${ratingChange >= 9 ? styles.star2 : styles.star1}`} onMouseLeave={() => setRatingChange(rating)} onMouseEnter={() => setRatingChange(9)} onClick={() => {if (rating !== 9) { setRating(ratingChange); FetchRating() } else { setRating(); FetchDeleteRating()}}} />
-                    <Star className={`${ratingChange === 10 ? styles.star2 : styles.star1}`} onMouseLeave={() => setRatingChange(rating)} onMouseEnter={() => setRatingChange(10)} onClick={() => {if (rating !== 10) { setRating(ratingChange); FetchRating() } else { setRating(); FetchDeleteRating()}}} />
+                    <Star className={`${ratingChange >= 1 ? styles.star2 : styles.star1}`} onMouseLeave={() => setRatingChange(rating)} onMouseEnter={() => setRatingChange(1)} onClick={() => {if (rating !== 1) { setRating(1); setRatingChange(1); FetchRating(1) } else { setRating(); setRatingChange(); FetchDeleteRating()}}} />
+                    <Star className={`${ratingChange >= 2 ? styles.star2 : styles.star1}`} onMouseLeave={() => setRatingChange(rating)} onMouseEnter={() => setRatingChange(2)} onClick={() => {if (rating !== 2) { setRating(2); setRatingChange(2); FetchRating(2) } else { setRating(); setRatingChange(); FetchDeleteRating()}}} />
+                    <Star className={`${ratingChange >= 3 ? styles.star2 : styles.star1}`} onMouseLeave={() => setRatingChange(rating)} onMouseEnter={() => setRatingChange(3)} onClick={() => {if (rating !== 3) { setRating(3); setRatingChange(3); FetchRating(3) } else { setRating(); setRatingChange(); FetchDeleteRating()}}} />
+                    <Star className={`${ratingChange >= 4 ? styles.star2 : styles.star1}`} onMouseLeave={() => setRatingChange(rating)} onMouseEnter={() => setRatingChange(4)} onClick={() => {if (rating !== 4) { setRating(4); setRatingChange(4); FetchRating(4) } else { setRating(); setRatingChange(); FetchDeleteRating()}}} />
+                    <Star className={`${ratingChange >= 5 ? styles.star2 : styles.star1}`} onMouseLeave={() => setRatingChange(rating)} onMouseEnter={() => setRatingChange(5)} onClick={() => {if (rating !== 5) { setRating(5); setRatingChange(5); FetchRating(5) } else { setRating(); setRatingChange(); FetchDeleteRating()}}} />
+                    <Star className={`${ratingChange >= 6 ? styles.star2 : styles.star1}`} onMouseLeave={() => setRatingChange(rating)} onMouseEnter={() => setRatingChange(6)} onClick={() => {if (rating !== 6) { setRating(6); setRatingChange(6); FetchRating(6) } else { setRating(); setRatingChange(); FetchDeleteRating()}}} />
+                    <Star className={`${ratingChange >= 7 ? styles.star2 : styles.star1}`} onMouseLeave={() => setRatingChange(rating)} onMouseEnter={() => setRatingChange(7)} onClick={() => {if (rating !== 7) { setRating(7); setRatingChange(7); FetchRating(7) } else { setRating(); setRatingChange(); FetchDeleteRating()}}} />
+                    <Star className={`${ratingChange >= 8 ? styles.star2 : styles.star1}`} onMouseLeave={() => setRatingChange(rating)} onMouseEnter={() => setRatingChange(8)} onClick={() => {if (rating !== 8) { setRating(8); setRatingChange(8); FetchRating(8) } else { setRating(); setRatingChange(); FetchDeleteRating()}}} />
+                    <Star className={`${ratingChange >= 9 ? styles.star2 : styles.star1}`} onMouseLeave={() => setRatingChange(rating)} onMouseEnter={() => setRatingChange(9)} onClick={() => {if (rating !== 9) { setRating(9); setRatingChange(9); FetchRating(9) } else { setRating(); setRatingChange(); FetchDeleteRating()}}} />
+                    <Star className={`${ratingChange === 10 ? styles.star2 : styles.star1}`} onMouseLeave={() => setRatingChange(rating)} onMouseEnter={() => setRatingChange(10)} onClick={() => {if (rating !== 10) { setRating(10); setRatingChange(10); FetchRating(10) } else { setRating(); setRatingChange(); FetchDeleteRating()}}} />
                     <div className={styles.average}> {movieData.vote_average} </div>
                     <div className={styles.count} >  ({movieData.vote_count}) </div>
-                </div>
+                    {ratingPreLoad && <img className={styles.smalSpinner} src={SmalSpinner} alt=""/>}
+                </div> 
                 <div className={styles.head} >
                     The similar movies:
                 </div>
@@ -175,7 +180,9 @@ export function MovieDetails() {
                     {similarArr !== 0 ?
                     <FcPrevious className={styles.gr} onClick={() => setSimilarArr(similarArr-5)}/> 
                     : <div className={styles.emptyGr}>  </div>}
+                    <div onClick={() => MovieDetails()} >
                     <MovieCard className={styles.movieCard} moviesData={similar.results.slice(similarArr, similarArr+5)} /> 
+                    </div>
                     {similarArr !== 15 ?
                     <FcNext className={styles.gr} onClick={() => setSimilarArr(similarArr+5)}/>
                     : <div className={styles.emptyGr}>  </div>}

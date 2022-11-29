@@ -17,14 +17,90 @@
     height: 2.5em;
     @media (max-width: 480px) {
         font-size: 1.5em;
-    }
-    button {
+    }        
+    .menuContainer {
+        margin-left: 2.5em;
         background: none;
-        border: none;
-        color: rgb(46, 133, 158);
+        width: 55em;
+        .dropdownMenu {
+            background: rgb(34, 45, 51);
+            width: 55em;
+            margin-top: 2.5em;
+            -webkit-box-shadow: inset 0px 11px 10px -7px rgba(0,0,0,0.2); 
+            box-shadow: inset 0px 11px 10px -7px rgba(0,0,0,0.2);
+            display: flex;
+            flex-wrap: wrap;
+            position: absolute;
+            z-index: 1000;
+            @media (max-width: 480px) {
+                max-width: 30em;
+            }   
+            .data {
+                border-radius: 0.2em;
+                background: none;
+                padding: 0.5em 1em 0.5em 1em;
+                min-width: 8em;
+                max-height: 1.1em;
+                color: white;
+                text-decoration: none;
+                &:hover {
+                    background: rgb(80, 80, 80);
+                    cursor: pointer;
+                }
+            }
+        }
+    }
+    .inputContainer {
+        height: 1.5em;
+        border-radius: 0.5em;
+        border: 1px solid rgb(34, 45, 51);
+        width: 20rem;
+        display: flex;
+        background: rgb(80, 80, 80);
+        margin-top: 0.6em;
+        margin-left: 37rem;
+        position: absolute;
+        @media (max-width: 480px) {
+            font-size: 1em;
+        }
+        input {
+            border: none;
+            width: 100%;
+            border-radius: 0.5em;
+            font-family: 'Arimo';
+            outline: none;
+            background: rgb(80, 80, 80);
+            color: white;
+            font-weight: bold;
+        }
+        .grSearch {
+            height: 1em;
+            width: 1em;
+            margin-top: 0.2em;
+            margin-left: 0.2em;
+            background: rgb(80, 80, 80);
+        }
+        button {
+            width: 5em;
+            font-weight: bold;
+            color: white;
+            background: rgb(6, 15, 19);
+            border: none;
+            border-radius: 0.5em;
+            &:active {
+                scale: 0.9;
+            }
+        }
+    }    
+    .name {
+        display: flex;
+        background: none;
+        margin-left: 3rem;
+        margin-top: 0.6em;
         font-weight: bold;
-        font-size: 1rem;
-        margin-left: 55rem;
-        text-decoration: underline;
-    } 
+        color: white;
+        position: absolute;
+        cursor: pointer;
+    }
 }
+

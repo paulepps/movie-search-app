@@ -38,11 +38,11 @@
             background: rgb(9, 22, 28);
             padding: 1rem;
             border: 1px solid black;
-            margin-left: 33em;
+            margin-left: 33rem;
             z-index: 1000;
             .actorPhoto {
-                max-width: 10em;
-                max-height: 15em;
+                width: 10em;
+                height: 12em;
             }
             .actorName {
                 font-weight: bold;
@@ -151,13 +151,16 @@
             padding-top: 0.6rem;
             margin-left: 0.5rem;
         }
+        .smalSpinner{
+            background: none;
+            width: 1.5rem;
+        }
     }
     .movieCardContainer {
-        //max-height: 21em;
-        //overflow: hidden;
         display: flex;
         justify-content: space-around;
         font-size: 14px;
+        background: rgb(9, 22, 28);
         .gr {
             margin-top: 3.4em;
             background: none;
