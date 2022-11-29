@@ -65,7 +65,7 @@ export function App() {
       GenreId, ToDefault, FetchSearch
     }}>
       <Routes>
-        <Route path='/' element={<MainPage 
+        <Route path='movie-search-app' element={<MainPage 
           movies={movies} 
           sortBy={setSortBy} 
           page={setPage}

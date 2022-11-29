@@ -21,7 +21,7 @@ export function Header() {
     const HandleKeyPress = (event) => {
         if(event.key === 'Enter'){
             FetchSearch(searchValue);
-            !!searchValue && navigate('/')
+            !!searchValue && navigate('/movie-search-app')
         }
     }
 
@@ -38,7 +38,7 @@ export function Header() {
     return (
         <>
             <div className={styles.headerTop}>
-                <img onClick={() => {navigate('/'); ToDefault(); FetchSearch() }} className={styles.headerLogo} src={Logo} alt=""/>
+                <img onClick={() => {navigate('/movie-search-app'); ToDefault(); FetchSearch() }} className={styles.headerLogo} src={Logo} alt=""/>
             </div>
             <div className={styles.headerBot}>
                 <div className={styles.name} onClick={() => setFocus(!focus)} onMouseOver={() => setFocus(true)} onMouseOut={() => setFocus(false)}>
@@ -48,14 +48,14 @@ export function Header() {
                 <div className={styles.menuContainer} onMouseOver={() => setFocus(true)} onMouseOut={() => setFocus(false)}>
                     <div className={styles.dropdownMenu} > 
                         {genresData.map((data) => (
-                            <Link to='/' className={styles.data} key={data.id} onClick={() => {GenreId(data.id); FetchSearch(); setFocus(false)}} > {data.name} </Link>
+                            <Link to='/movie-search-app' className={styles.data} key={data.id} onClick={() => {GenreId(data.id); FetchSearch(); setFocus(false)}} > {data.name} </Link>
                         ))}
                     </div>
                 </div>}
                 <div className={styles.inputContainer}>
                     <GrSearch className={styles.grSearch} />
                     <input maxLength="100" placeholder="Enter movie title" onKeyPress={HandleKeyPress} onChange={(event) => setSearchValue(event.target.value)} />
-                    <button onClick={() => {FetchSearch(searchValue); !!searchValue && navigate('/')}}> Search </button>
+                    <button onClick={() => {FetchSearch(searchValue); !!searchValue && navigate('/movie-search-app')}}> Search </button>
                 </div>                
             </div>
         </>
