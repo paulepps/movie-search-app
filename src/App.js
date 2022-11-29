@@ -74,7 +74,7 @@ export function App() {
           movieSortBy={movieSortByButton}
           searchValue={searchValue}
         />} />
-        <Route path='MovieDetails/:movieId' element={<MovieDetails />} />
+        <Route path='movie-search-app/MovieDetails/:movieId' element={<MovieDetails />} />
         <Route path='*' element={<NotFoundPage />} />
       </Routes>
     </Context.Provider>
