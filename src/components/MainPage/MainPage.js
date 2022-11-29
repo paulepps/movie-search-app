@@ -31,7 +31,6 @@ export function MainPage({movies, sortBy, page, movieSortByButton, movieSortBy, 
     
     const firstPages = movies.total_pages < 10 ? pages.slice(0, movies.total_pages) : pages;
 
-
     return (           
         <>
             {!!moviesData &&

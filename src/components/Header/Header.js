@@ -48,7 +48,7 @@ export function Header() {
                 <div className={styles.menuContainer} onMouseOver={() => setFocus(true)} onMouseOut={() => setFocus(false)}>
                     <div className={styles.dropdownMenu} > 
                         {genresData.map((data) => (
-                            <Link to='/' className={styles.data} key={data.id} onClick={() => {GenreId(data.id); FetchSearch()}} > {data.name} </Link>
+                            <Link to='/' className={styles.data} key={data.id} onClick={() => {GenreId(data.id); FetchSearch(); setFocus(false)}} > {data.name} </Link>
                         ))}
                     </div>
                 </div>}

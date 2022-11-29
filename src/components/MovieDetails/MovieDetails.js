@@ -34,7 +34,6 @@ export function MovieDetails() {
     const [isLoading, setIsLoading] = useState(true);
     const {movieId} = useParams();
 
-
     const guestId = localStorage.getItem('guestId');    
     
     async function GuestRating(guestInfo, movieId) {
@@ -53,7 +52,7 @@ export function MovieDetails() {
             setRatingPreLoad(false)
         )
     }
-    //console.log('render')
+
     async function FetchDeleteRating() {
         return (
             await DeleteRating(movieId, guestId)
@@ -90,13 +89,11 @@ export function MovieDetails() {
     useEffect(() => {
         setIsLoading(true);
         FetchMovie();
-        FetchGuestInfo()    
-        //console.log('render')
-        //window.scrollTo(0, 0); ------------------------------------------------------------------------------
+        FetchGuestInfo()
+        window.scrollTo(0, 0);
     // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [movieId])
-                                    
-    //setIsLoading(true)
+                       
     return (
         isLoading ? 
         <Preloader />
@@ -214,6 +211,3 @@ export function MovieDetails() {
         </>
     );
 }
-//.slice(0, review.author_details.avatar_path.length)
-// onMouseEnter={() => console.log(reviews)}
-//{moviesData !== undefined &&<img className={styles.poster} src={`https://image.tmdb.org/t/p/w500${moviesData.filter((el) => el.id === movieId)[0].poster_path}`} alt=""/>} 
