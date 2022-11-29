@@ -9,7 +9,7 @@ export function NotFoundPage() {
                 You shouldn't be here <span> ☣ </span>
             </div>
             <div className={styles.container}>
-                <Link to='/' className={styles.gohome}>
+                <Link to='movie-search-app/' className={styles.gohome}>
                     Go home
                 </Link>
             </div>

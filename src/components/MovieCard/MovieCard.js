@@ -10,7 +10,7 @@ export function MovieCard({moviesData}) {
             <div className={styles.container}>
                 {moviesData.map((data) => (
                 <div className={styles.movieCard} key={data.id+1} >
-                    <Link to={`/MovieDetails/${data.id}`} className={styles.link} >
+                    <Link to={`movie-search-app/MovieDetails/${data.id}`} className={styles.link} >
                         <BsPlayCircle className={styles.hover}/>
                         <img className={styles.img} src={!!data.poster_path ? `https://image.tmdb.org/t/p/w500${data.poster_path}` : NoContent} alt=""/>
                         <div className={styles.title}> {data.title} </div>
