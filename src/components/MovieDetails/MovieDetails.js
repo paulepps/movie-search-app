@@ -179,7 +179,7 @@ export function MovieDetails() {
                     {ratingPreLoad && <img className={styles.smalSpinner} src={SmalSpinner} alt=""/>}
                 </div> 
                 <div className={styles.head} >
-                    The similar movies:
+                    Similar movies:
                 </div>
                 <div className={styles.movieCardContainer}  >
                     {similarArr !== 0 ?
@@ -193,7 +193,7 @@ export function MovieDetails() {
                     : <div className={styles.emptyGr}>  </div>}
                 </div>
                 <div className={styles.head}>
-                    Users reviews for a movie:
+                    User reviews:
                 </div>
                 {!!reviews &&
                 <div> 
